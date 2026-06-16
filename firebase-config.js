@@ -4,7 +4,7 @@
 // 3. Copia aquí la configuración web de tu app Firebase.
 // 4. Reemplaza los valores de ejemplo.
 
-const firebaseConfig = {
+ export const firebaseConfig = {
   apiKey: "AIzaSyAimVozXLaQeG8bieOMhYd2ITDHSqyY5dk",
   authDomain: "examen-tercero.firebaseapp.com",
   projectId: "examen-tercero",
