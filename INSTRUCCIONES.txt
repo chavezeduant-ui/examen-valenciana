@@ -1,20 +1,21 @@
-CAMBIOS INCLUIDOS:
-- PDF sin cinta lateral de páginas.
-- Se quitó la casilla "Revisar".
-- Reactivos uno por uno.
-- Botón único "Siguiente".
-- No hay botón para regresar.
-- Botón debajo del PDF y del reactivo.
-- Panel para generar código QR con enlace público.
+EXAMEN EN LÍNEA COLEGIO VALENCIANA - V3
 
-PARA USARLO:
+Cambios incluidos:
+- Diseño mejorado para celulares.
+- El acceso a Código QR, Panel docente y Exportar Excel está protegido con contraseña.
+- El campo Grupo fue cambiado por Grado.
+- El grado aparece fijo como "Tercero".
+- Los alumnos solo ven el examen y sus datos.
+- Contraseña inicial docente: valenciana2026
+
+Para usar:
 1. Descomprime el ZIP.
 2. Abre index.html con Chrome o Edge.
-3. Captura nombre, grupo y matrícula.
-4. El alumno lee el PDF y responde el reactivo de abajo.
-5. Para avanzar debe seleccionar respuesta.
-6. Al terminar, guarda resultado y exporta Excel.
+3. Para docente, clic en Acceso docente.
+4. Contraseña: valenciana2026
+5. Desde ahí puedes capturar clave, exportar Excel y generar QR.
 
-PARA INGRESAR DESDE CUALQUIER DISPOSITIVO:
-Sube la carpeta a GitHub Pages, Netlify o Firebase Hosting.
-Después copia el enlace público y úsalo en el botón "Código QR".
+Para celulares:
+- Súbelo a GitHub Pages, Netlify o Firebase Hosting.
+- Copia el enlace público.
+- En Acceso docente > Código QR, pega el enlace y genera el QR.
