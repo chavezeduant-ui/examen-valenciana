@@ -1,21 +1,26 @@
-EXAMEN EN LÍNEA COLEGIO VALENCIANA - V3
+EXAMEN EN LÍNEA COLEGIO VALENCIANA - V4 MÓVIL
 
 Cambios incluidos:
-- Diseño mejorado para celulares.
-- El acceso a Código QR, Panel docente y Exportar Excel está protegido con contraseña.
-- El campo Grupo fue cambiado por Grado.
-- El grado aparece fijo como "Tercero".
-- Los alumnos solo ven el examen y sus datos.
-- Contraseña inicial docente: valenciana2026
+- Ya no usa PDF incrustado; ahora usa imágenes de las páginas del cuadernillo.
+- Funciona mejor en celulares iPhone y Android.
+- Primera pantalla: registro del estudiante.
+- Segunda pantalla: examen.
+- Registro separado por:
+  - Nombre(s)
+  - Apellido paterno
+  - Apellido materno
+  - Grado fijo: Tercero
+  - Matrícula / Folio
+- Si se repite el mismo nombre completo en el mismo dispositivo, ya no permite ingresar.
+- Reactivos uno por uno.
+- Sin botón para regresar.
+- Acceso docente protegido con contraseña.
+- Exportación a Excel.
+- Generador de QR.
 
-Para usar:
-1. Descomprime el ZIP.
-2. Abre index.html con Chrome o Edge.
-3. Para docente, clic en Acceso docente.
-4. Contraseña: valenciana2026
-5. Desde ahí puedes capturar clave, exportar Excel y generar QR.
+Contraseña docente inicial:
+valenciana2026
 
-Para celulares:
-- Súbelo a GitHub Pages, Netlify o Firebase Hosting.
-- Copia el enlace público.
-- En Acceso docente > Código QR, pega el enlace y genera el QR.
+IMPORTANTE:
+La detección de nombres repetidos funciona en el mismo dispositivo/navegador.
+Si necesitas impedir duplicados entre todos los celulares al mismo tiempo, se requiere conectar Firebase o una base de datos central.

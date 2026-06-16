@@ -1,31 +1,137 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Examen en línea | Colegio Valenciana</title><link rel="stylesheet" href="style.css"><script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script></head><body>
-<header class="topbar"><div class="brand"><img src="logo.png"><div><h1>Examen en línea</h1><p>RIMA - 3° Secundaria</p></div></div><div class="actions"><button id="btnTeacherLogin" class="secondary">Acceso docente</button></div></header>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>Examen en línea | Colegio Valenciana</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="logo.png" alt="Colegio Valenciana" />
+      <div>
+        <h1>Examen en línea</h1>
+        <p>RIMA - 3° Secundaria</p>
+      </div>
+    </div>
+    <button id="btnTeacherLogin" class="teacher-mini">Docente</button>
+  </header>
 
-<main class="layout">
-<aside class="student-card">
-<h2>Datos del alumno</h2>
-<label>Nombre completo<input id="studentName" placeholder="Escribe el nombre del estudiante"></label>
-<label>Grado<input id="studentGrade" value="Tercero" readonly></label>
-<label>Matrícula / Folio<input id="studentId" placeholder="Opcional"></label>
-<div class="status"><div><strong id="answered">0</strong><span>Respondidas</span></div><div><strong id="progressNum">1</strong><span>Reactivo actual</span></div></div>
-<p id="saved" class="saved">Sin guardar</p>
-<h3>Avance por sección</h3><div id="sectionNav" class="section-nav"></div>
-<div class="notice"><strong>Importante:</strong><br>El alumno no podrá regresar a reactivos anteriores.</div>
-</aside>
+  <main>
+    <section id="registrationScreen" class="screen active">
+      <div class="register-card">
+        <img src="logo.png" class="register-logo" alt="Colegio Valenciana" />
+        <h2>Registro del estudiante</h2>
+        <p class="sub">Captura tus datos para comenzar el examen.</p>
 
-<section class="exam-area">
-<div class="exam-toolbar"><strong id="currentSectionTitle"></strong><p id="currentQuestionText"></p></div>
-<div class="pdf-panel"><div class="panel-title"><strong>Cuadernillo del examen</strong><span>Lee la pregunta en el PDF y responde abajo.</span></div><iframe id="pdfFrame" src="cuadernillo_rima.pdf#page=3&toolbar=0&navpanes=0&scrollbar=0&view=FitH"></iframe></div>
-<div class="single-question-card"><div class="question-head"><span id="qBadge">Reactivo 1</span><span id="sectionBadge">Español I</span></div><div class="answer-options" id="answerOptions"></div><button id="btnNextQuestion" class="nextBtn">Siguiente →</button><button id="btnFinish" class="finish hidden">Finalizar y guardar resultado</button></div>
-</section>
-</main>
+        <label>Nombre(s)
+          <input id="studentNames" autocomplete="given-name" placeholder="Ej. Juan Carlos" />
+        </label>
 
-<dialog id="loginDialog"><div class="dialog-head"><h2>Acceso docente</h2><button id="closeLogin">×</button></div><div class="loginBox"><p>Ingresa la contraseña docente para acceder al panel, QR y exportación.</p><label>Contraseña<input id="teacherPassword" type="password" placeholder="Contraseña"></label><button id="loginTeacher" class="primary">Entrar</button><p class="hint">Contraseña inicial: <strong>valenciana2026</strong></p></div></dialog>
+        <label>Apellido paterno
+          <input id="studentPaternal" autocomplete="family-name" placeholder="Ej. Pérez" />
+        </label>
 
-<dialog id="teacherDialog"><div class="dialog-head"><h2>Panel docente</h2><button id="closeTeacher">×</button></div>
-<div class="teacher-tools"><p>Herramientas disponibles solo para el docente.</p><div class="tool-row"><button id="btnQr" class="secondary">Código QR</button><button id="btnExport" class="primary">Exportar Excel</button><button id="saveKey" class="primary">Guardar clave</button><button id="resetExam" class="secondary">Reiniciar examen actual</button><button id="clearResults" class="danger">Borrar resultados guardados</button><button id="logoutTeacher" class="secondary">Cerrar acceso docente</button></div></div>
-<div id="answerKeyGrid" class="key-grid"></div></dialog>
+        <label>Apellido materno
+          <input id="studentMaternal" placeholder="Ej. López" />
+        </label>
 
-<dialog id="qrDialog"><div class="dialog-head"><h2>Código QR de acceso</h2><button id="closeQr">×</button></div><div class="qrBox"><p>Para que funcione desde cualquier dispositivo, primero sube esta carpeta a internet. Después pega aquí el enlace público.</p><label>Enlace público del examen<input id="qrUrl" placeholder="https://..."></label><button id="generateQr" class="primary">Generar QR</button><div class="qrPreview"><img id="qrImage"></div><a id="downloadQr" class="downloadLink" download="QR_Examen_Colegio_Valenciana.png">Descargar QR</a></div></dialog>
+        <label>Grado
+          <input id="studentGrade" value="Tercero" readonly />
+        </label>
 
-<script src="app.js"></script></body></html>
+        <label>Matrícula / Folio
+          <input id="studentId" placeholder="Opcional" />
+        </label>
+
+        <button id="btnStartExam" class="startBtn">Comenzar examen</button>
+        <p id="registerError" class="error"></p>
+      </div>
+    </section>
+
+    <section id="examScreen" class="screen">
+      <div class="exam-header">
+        <div>
+          <strong id="studentDisplay">Estudiante</strong>
+          <p id="currentSectionTitle">Español I</p>
+        </div>
+        <div class="progress-box">
+          <span id="currentQuestionText">1 / 111</span>
+          <div class="progress-track"><div id="progressBar"></div></div>
+        </div>
+      </div>
+
+      <div class="book-page-card">
+        <div class="page-top">
+          <strong>Cuadernillo</strong>
+          <span id="pageNumberLabel">Página 3</span>
+        </div>
+        <img id="pageImage" class="page-image" alt="Página del cuadernillo" />
+      </div>
+
+      <div class="question-card">
+        <div class="question-head">
+          <span id="qBadge">Reactivo 1</span>
+          <span id="sectionBadge">Español I</span>
+        </div>
+
+        <div class="answer-options" id="answerOptions"></div>
+
+        <button id="btnNextQuestion" class="nextBtn">Siguiente →</button>
+        <button id="btnFinish" class="finish hidden">Finalizar y guardar resultado</button>
+      </div>
+    </section>
+
+    <section id="finishedScreen" class="screen">
+      <div class="finish-card">
+        <img src="logo.png" class="register-logo" alt="Colegio Valenciana" />
+        <h2>Examen enviado correctamente</h2>
+        <p>Tu examen fue guardado. Puedes cerrar esta página.</p>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="loginDialog">
+    <div class="dialog-head"><h2>Acceso docente</h2><button id="closeLogin">×</button></div>
+    <div class="dialog-body">
+      <label>Contraseña docente
+        <input id="teacherPassword" type="password" placeholder="Contraseña" />
+      </label>
+      <button id="loginTeacher" class="primary">Entrar</button>
+      <p class="hint">Contraseña inicial: <strong>valenciana2026</strong></p>
+    </div>
+  </dialog>
+
+  <dialog id="teacherDialog">
+    <div class="dialog-head"><h2>Panel docente</h2><button id="closeTeacher">×</button></div>
+    <div class="dialog-body">
+      <div class="tool-row">
+        <button id="btnQr" class="secondary">Código QR</button>
+        <button id="btnExport" class="primary">Exportar Excel</button>
+        <button id="saveKey" class="primary">Guardar clave</button>
+        <button id="clearResults" class="danger">Borrar resultados</button>
+        <button id="logoutTeacher" class="secondary">Cerrar acceso</button>
+      </div>
+      <h3>Clave de respuestas</h3>
+      <div id="answerKeyGrid" class="key-grid"></div>
+    </div>
+  </dialog>
+
+  <dialog id="qrDialog">
+    <div class="dialog-head"><h2>Código QR de acceso</h2><button id="closeQr">×</button></div>
+    <div class="dialog-body">
+      <p>Pega el enlace público del examen publicado en GitHub Pages, Netlify o Firebase Hosting.</p>
+      <label>Enlace público
+        <input id="qrUrl" placeholder="https://..." />
+      </label>
+      <button id="generateQr" class="primary">Generar QR</button>
+      <div class="qrPreview"><img id="qrImage" alt="Código QR" /></div>
+      <a id="downloadQr" class="downloadLink" download="QR_Examen_Colegio_Valenciana.png">Descargar QR</a>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
