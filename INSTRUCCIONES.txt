@@ -1,0 +1,20 @@
+CAMBIOS INCLUIDOS:
+- PDF sin cinta lateral de páginas.
+- Se quitó la casilla "Revisar".
+- Reactivos uno por uno.
+- Botón único "Siguiente".
+- No hay botón para regresar.
+- Botón debajo del PDF y del reactivo.
+- Panel para generar código QR con enlace público.
+
+PARA USARLO:
+1. Descomprime el ZIP.
+2. Abre index.html con Chrome o Edge.
+3. Captura nombre, grupo y matrícula.
+4. El alumno lee el PDF y responde el reactivo de abajo.
+5. Para avanzar debe seleccionar respuesta.
+6. Al terminar, guarda resultado y exporta Excel.
+
+PARA INGRESAR DESDE CUALQUIER DISPOSITIVO:
+Sube la carpeta a GitHub Pages, Netlify o Firebase Hosting.
+Después copia el enlace público y úsalo en el botón "Código QR".
