@@ -1,45 +1,16 @@
-EXAMEN EN LÍNEA COLEGIO VALENCIANA - V7 FIREBASE
+V8 Panel Docente
 
-Esta versión incluye:
-- Registro del estudiante con nombre(s), apellido paterno y apellido materno.
-- Grado fijo: Tercero.
-- Bloqueo de estudiante repetido usando Firebase Firestore.
-- Guardado de avance en Firebase.
-- Guardado de resultados finales en Firebase.
-- Resultados visibles para el alumno al finalizar.
-- Panel docente con contraseña.
-- Descarga de resultados desde Firebase.
-- Exportación a Excel.
-- Generador de QR.
-- Cuadernillo como imágenes, compatible con celulares.
+Cambios incluidos:
+- firebase-config.js corregido con los datos proporcionados.
+- Panel docente convertido en menú.
+- Dashboard con registrados, finalizados, en proceso y promedios.
+- Registros con calificación separada: Español /50, Matemáticas /61 y Total /111.
+- Reiniciar examen de un estudiante.
+- Borrar registro de un estudiante.
+- Clave de respuestas dentro de botón independiente.
+- Zoom para imágenes del cuadernillo.
+- Exportar Excel y generar QR.
 
-CONTRASEÑA DOCENTE INICIAL:
-valenciana2026
+Contraseña docente: valenciana2026
 
-ARCHIVO QUE DEBES CONFIGURAR:
-firebase-config.js
-
-PASOS:
-1. Crea un proyecto en Firebase.
-2. En Firebase, crea una aplicación web.
-3. Copia la configuración Firebase.
-4. Pégala en firebase-config.js.
-5. Activa Firestore Database.
-6. Sube todos los archivos a GitHub Pages, Netlify o Firebase Hosting.
-7. Abre el enlace público.
-8. Entra como docente y genera el QR.
-
-REGLAS DE FIRESTORE PARA PRUEBA CONTROLADA:
-
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /exams/{examId}/students/{studentId} {
-      allow read, write: if true;
-    }
-  }
-}
-
-IMPORTANTE:
-Estas reglas son abiertas para que el examen funcione sin cuentas de usuario.
-Para una versión más segura, se recomienda usar autenticación docente.
+Sube todos los archivos a GitHub Pages: index.html, app.js, style.css, firebase-config.js, logo.png y carpeta pages.
