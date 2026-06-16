@@ -1,11 +1,122 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>Examen Colegio Valenciana</title><link rel="stylesheet" href="style.css"><script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script></head><body>
-<header class="topbar"><div class="brand"><img src="logo.png"><div><h1>Examen en línea</h1><p>RIMA - 3° Secundaria</p></div></div><button id="btnTeacherLogin" class="teacher-mini">Docente</button></header>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>Examen en línea | Colegio Valenciana</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><img src="logo.png" alt="Colegio Valenciana"><div><h1>Examen en línea</h1><p>RIMA - 3° Secundaria</p></div></div>
+  <button id="btnTeacherLogin" class="teacher-mini">Docente</button>
+</header>
+
 <main>
-<section id="registrationScreen" class="screen active"><div class="register-card"><img src="logo.png" class="register-logo"><h2>Registro del estudiante</h2><p class="sub">Captura tus datos para comenzar el examen.</p><label>Nombre(s)<input id="studentNames" placeholder="Ej. Juan Carlos"></label><label>Apellido paterno<input id="studentPaternal" placeholder="Ej. Pérez"></label><label>Apellido materno<input id="studentMaternal" placeholder="Ej. López"></label><label>Grado<input value="Tercero" readonly></label><label>Matrícula / Folio<input id="studentId" placeholder="Opcional"></label><button id="btnStartExam" class="startBtn">Comenzar examen</button><p id="registerError" class="error"></p></div></section>
-<section id="examScreen" class="screen"><div class="exam-header"><div><strong id="studentDisplay"></strong><p id="currentSectionTitle"></p></div><div class="progress-box"><span id="currentQuestionText"></span><div class="progress-track"><div id="progressBar"></div></div></div></div><div class="book-page-card"><div class="page-top"><strong>Cuadernillo</strong><span id="pageNumberLabel"></span></div><div class="zoom-tools"><button id="zoomOut" class="pageBtn">−</button><span id="zoomLabel">100%</span><button id="zoomIn" class="pageBtn">+</button><button id="zoomReset" class="pageBtn">Restablecer</button></div><div id="imageViewport" class="image-viewport"><img id="pageImage" class="page-image"></div><div class="page-controls"><button id="btnPrevPage" class="pageBtn">← Página anterior</button><button id="btnNextPage" class="pageBtn">Página siguiente →</button></div></div><div class="question-card"><div class="question-head"><span id="qBadge"></span><span id="sectionBadge"></span></div><div class="answer-options" id="answerOptions"></div><button id="btnNextQuestion" class="nextBtn">Siguiente reactivo →</button><button id="btnFinish" class="finish hidden">Finalizar y guardar resultado</button></div></section>
-<section id="finishedScreen" class="screen"><div class="finish-card"><img src="logo.png" class="register-logo"><h2>Examen enviado correctamente</h2><p class="sub">Estos son tus resultados:</p><div id="studentResults"></div><p class="small-note">Puedes tomar captura de pantalla.</p></div></section>
+<section id="registrationScreen" class="screen active">
+  <div class="register-card">
+    <img src="logo.png" class="register-logo" alt="Colegio Valenciana">
+    <h2>Registro del estudiante</h2>
+    <p class="sub">Captura tus datos para comenzar el examen.</p>
+    <label>Nombre(s)<input id="studentNames" autocomplete="given-name" placeholder="Ej. Juan Carlos"></label>
+    <label>Apellido paterno<input id="studentPaternal" autocomplete="family-name" placeholder="Ej. Pérez"></label>
+    <label>Apellido materno<input id="studentMaternal" placeholder="Ej. López"></label>
+    <label>Grado<input id="studentGrade" value="Tercero" readonly></label>
+    <label>Matrícula / Folio<input id="studentId" placeholder="Opcional"></label>
+    <button id="btnStartExam" class="startBtn">Comenzar examen</button>
+    <p id="registerError" class="error"></p>
+  </div>
+</section>
+
+<section id="examScreen" class="screen">
+  <div class="exam-header">
+    <div><strong id="studentDisplay">Estudiante</strong><p id="currentSectionTitle">Español I</p></div>
+    <div class="progress-box"><span id="currentQuestionText">Reactivo 1 / 111</span><div class="progress-track"><div id="progressBar"></div></div></div>
+  </div>
+
+  <div class="book-page-card">
+    <div class="page-top"><strong>Cuadernillo</strong><span id="pageNumberLabel">Página 1 de 35</span></div>
+    <div class="zoom-tools">
+      <button id="zoomOut" class="pageBtn">−</button><span id="zoomLabel">100%</span><button id="zoomIn" class="pageBtn">+</button><button id="zoomReset" class="pageBtn">Restablecer</button>
+    </div>
+    <div id="imageViewport" class="image-viewport"><img id="pageImage" class="page-image" alt="Página del cuadernillo"></div>
+    <div class="page-controls"><button id="btnPrevPage" class="pageBtn">← Página anterior</button><button id="btnNextPage" class="pageBtn">Página siguiente →</button></div>
+  </div>
+
+  <div class="question-card">
+    <div class="question-head"><span id="qBadge">Reactivo 1</span><span id="sectionBadge">Español I</span></div>
+    <div class="answer-options" id="answerOptions"></div>
+    <button id="btnNextQuestion" class="nextBtn">Siguiente reactivo →</button>
+    <button id="btnFinishEarly" class="finishEarly">Finalizar examen</button>
+    <button id="btnFinish" class="finish hidden">Finalizar y guardar resultado</button>
+  </div>
+</section>
+
+<section id="finishedScreen" class="screen">
+  <div class="finish-card">
+    <img src="logo.png" class="register-logo" alt="Colegio Valenciana">
+    <h2>Examen enviado correctamente</h2>
+    <p class="sub">Estos son tus resultados:</p>
+    <div id="studentResults" class="student-results"></div>
+    <p class="small-note">Puedes tomar captura de pantalla de tus resultados.</p>
+  </div>
+</section>
 </main>
-<dialog id="loginDialog"><div class="dialog-head"><h2>Acceso docente</h2><button id="closeLogin">×</button></div><div class="dialog-body"><label>Contraseña docente<input id="teacherPassword" type="password"></label><button id="loginTeacher" class="primary">Entrar</button><p class="hint">Contraseña inicial: <b>valenciana2026</b></p></div></dialog>
-<dialog id="teacherDialog" class="teacher-dialog"><div class="teacher-shell"><aside class="teacher-menu"><div class="teacher-title"><strong>Panel docente</strong><span id="firebaseStatus">Firebase</span></div><button class="menu-item active" data-panel="dashboardPanel">Dashboard</button><button class="menu-item" data-panel="studentsPanel">Registros</button><button class="menu-item" data-panel="keyPanel">Clave de respuestas</button><button class="menu-item" data-panel="toolsPanel">Herramientas</button><button id="logoutTeacher" class="menu-item dangerMenu">Cerrar acceso</button></aside><section class="teacher-content"><div class="dialog-head teacher-head"><h2 id="teacherPanelTitle">Dashboard</h2><button id="closeTeacher">×</button></div><div id="dashboardPanel" class="teacher-panel active"><div class="stat-grid"><div class="stat-card"><span>Registrados</span><strong id="statRegistered">0</strong></div><div class="stat-card"><span>Finalizados</span><strong id="statFinished">0</strong></div><div class="stat-card"><span>En proceso</span><strong id="statProgress">0</strong></div><div class="stat-card"><span>Promedio total</span><strong id="statAverage">0%</strong></div><div class="stat-card"><span>Promedio Español</span><strong id="statSpanish">0/50</strong></div><div class="stat-card"><span>Promedio Matemáticas</span><strong id="statMath">0/61</strong></div></div></div><div id="studentsPanel" class="teacher-panel"><div class="tool-row"><button id="btnRefreshStudents" class="primary">Actualizar registros</button><button id="btnExport" class="primary">Exportar Excel</button></div><div class="table-wrap"><table class="teacher-table"><thead><tr><th>Nombre</th><th>Estado</th><th>Español</th><th>Matemáticas</th><th>Total</th><th>Acciones</th></tr></thead><tbody id="studentsTableBody"></tbody></table></div></div><div id="keyPanel" class="teacher-panel"><div class="tool-row"><button id="toggleKey" class="secondary">Mostrar / ocultar clave</button><button id="saveKey" class="primary">Guardar clave local</button></div><div id="answerKeyGrid" class="key-grid hidden"></div></div><div id="toolsPanel" class="teacher-panel"><div class="tool-row vertical-tools"><button id="btnQr" class="secondary">Generar código QR</button><button id="btnDownloadCloud" class="primary">Actualizar resultados de Firebase</button><button id="clearResults" class="danger">Borrar resultados locales</button></div></div></section></div></dialog>
-<dialog id="qrDialog"><div class="dialog-head"><h2>Código QR de acceso</h2><button id="closeQr">×</button></div><div class="dialog-body"><label>Enlace público<input id="qrUrl" placeholder="https://..."></label><button id="generateQr" class="primary">Generar QR</button><div class="qrPreview"><img id="qrImage"></div><a id="downloadQr" class="downloadLink" download="QR_Examen_Colegio_Valenciana.png">Descargar QR</a></div></dialog>
-<script type="module" src="app.js"></script></body></html>
+
+<dialog id="loginDialog">
+  <div class="dialog-head"><h2>Acceso docente</h2><button id="closeLogin">×</button></div>
+  <div class="dialog-body"><label>Contraseña docente<input id="teacherPassword" type="password" placeholder="Contraseña"></label><button id="loginTeacher" class="primary">Entrar</button><p class="hint">Contraseña inicial: <strong>valenciana2026</strong></p></div>
+</dialog>
+
+<dialog id="teacherDialog" class="teacher-dialog">
+  <div class="teacher-shell">
+    <aside class="teacher-menu">
+      <div class="teacher-title"><strong>Panel docente</strong><span id="firebaseStatus">Firebase</span></div>
+      <button class="menu-item active" data-panel="dashboardPanel">Dashboard</button>
+      <button class="menu-item" data-panel="studentsPanel">Registros</button>
+      <button class="menu-item" data-panel="keyPanel">Clave de respuestas</button>
+      <button class="menu-item" data-panel="toolsPanel">Herramientas</button>
+      <button id="logoutTeacher" class="menu-item dangerMenu">Cerrar acceso</button>
+    </aside>
+    <section class="teacher-content">
+      <div class="dialog-head teacher-head"><h2 id="teacherPanelTitle">Dashboard</h2><button id="closeTeacher">×</button></div>
+      <div id="dashboardPanel" class="teacher-panel active">
+        <div class="stat-grid">
+          <div class="stat-card"><span>Registrados</span><strong id="statRegistered">0</strong></div>
+          <div class="stat-card"><span>Finalizados</span><strong id="statFinished">0</strong></div>
+          <div class="stat-card"><span>En proceso</span><strong id="statProgress">0</strong></div>
+          <div class="stat-card"><span>Promedio total</span><strong id="statAverage">0%</strong></div>
+          <div class="stat-card"><span>Promedio Español</span><strong id="statSpanish">0/50</strong></div>
+          <div class="stat-card"><span>Promedio Matemáticas</span><strong id="statMath">0/61</strong></div>
+        </div>
+      </div>
+      <div id="studentsPanel" class="teacher-panel">
+        <div class="tool-row"><button id="btnRefreshStudents" class="primary">Actualizar registros</button><button id="btnExport" class="primary">Exportar Excel</button></div>
+        <div class="table-wrap"><table class="teacher-table"><thead><tr><th>Nombre</th><th>Estado</th><th>Español</th><th>Matemáticas</th><th>Total</th><th>Acciones</th></tr></thead><tbody id="studentsTableBody"></tbody></table></div>
+      </div>
+      <div id="keyPanel" class="teacher-panel">
+        <div class="tool-row"><button id="toggleKey" class="secondary">Mostrar / ocultar clave</button><button id="saveKey" class="primary">Guardar clave local</button></div>
+        <div id="answerKeyGrid" class="key-grid hidden"></div>
+      </div>
+      <div id="toolsPanel" class="teacher-panel">
+        <div class="tool-row vertical-tools"><button id="btnQr" class="secondary">Generar código QR</button><button id="btnDownloadCloud" class="primary">Actualizar resultados de Firebase</button><button id="clearResults" class="danger">Borrar resultados locales</button></div>
+      </div>
+    </section>
+  </div>
+</dialog>
+
+<dialog id="qrDialog">
+  <div class="dialog-head"><h2>Código QR de acceso</h2><button id="closeQr">×</button></div>
+  <div class="dialog-body">
+    <p>Pega el enlace público del examen publicado en GitHub Pages, Netlify o Firebase Hosting.</p>
+    <label>Enlace público<input id="qrUrl" placeholder="https://..."></label>
+    <button id="generateQr" class="primary">Generar QR</button>
+    <div class="qrPreview"><img id="qrImage" alt="Código QR"></div>
+    <a id="downloadQr" class="downloadLink" download="QR_Examen_Colegio_Valenciana.png">Descargar QR</a>
+  </div>
+</dialog>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

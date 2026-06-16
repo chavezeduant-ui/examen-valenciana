@@ -1,16 +1,9 @@
-V8 Panel Docente
-
-Cambios incluidos:
-- firebase-config.js corregido con los datos proporcionados.
-- Panel docente convertido en menú.
-- Dashboard con registrados, finalizados, en proceso y promedios.
-- Registros con calificación separada: Español /50, Matemáticas /61 y Total /111.
-- Reiniciar examen de un estudiante.
-- Borrar registro de un estudiante.
-- Clave de respuestas dentro de botón independiente.
-- Zoom para imágenes del cuadernillo.
-- Exportar Excel y generar QR.
-
+V9 corregida:
+- Menú docente funcional.
+- Código QR restaurado en Herramientas.
+- Botón Finalizar examen siempre visible.
+- Finalizar examen califica lo respondido y deja sin responder como incorrecto.
+- Firebase configurado con los datos proporcionados.
+- Zoom en imágenes del cuadernillo.
+- Registros con Español /50 y Matemáticas /61.
 Contraseña docente: valenciana2026
-
-Sube todos los archivos a GitHub Pages: index.html, app.js, style.css, firebase-config.js, logo.png y carpeta pages.

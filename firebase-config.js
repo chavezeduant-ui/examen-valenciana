@@ -7,4 +7,5 @@ export const firebaseConfig = {
   appId: "1:1052679691741:web:2932a073d2e71a9bf76a34",
   measurementId: "G-QRQSB4EKDM"
 };
+
 export const EXAM_ID = "rima_tercero_secundaria_2026";
