@@ -58,7 +58,7 @@
           <p id="currentSectionTitle">Español I</p>
         </div>
         <div class="progress-box">
-          <span id="currentQuestionText">1 / 111</span>
+          <span id="currentQuestionText">Reactivo 1 / 111</span>
           <div class="progress-track"><div id="progressBar"></div></div>
         </div>
       </div>
@@ -66,9 +66,13 @@
       <div class="book-page-card">
         <div class="page-top">
           <strong>Cuadernillo</strong>
-          <span id="pageNumberLabel">Página 3</span>
+          <span id="pageNumberLabel">Página 1 de 35</span>
         </div>
         <img id="pageImage" class="page-image" alt="Página del cuadernillo" />
+        <div class="page-controls">
+          <button id="btnPrevPage" class="pageBtn">← Página anterior</button>
+          <button id="btnNextPage" class="pageBtn">Página siguiente →</button>
+        </div>
       </div>
 
       <div class="question-card">
@@ -79,7 +83,7 @@
 
         <div class="answer-options" id="answerOptions"></div>
 
-        <button id="btnNextQuestion" class="nextBtn">Siguiente →</button>
+        <button id="btnNextQuestion" class="nextBtn">Siguiente reactivo →</button>
         <button id="btnFinish" class="finish hidden">Finalizar y guardar resultado</button>
       </div>
     </section>
@@ -88,7 +92,9 @@
       <div class="finish-card">
         <img src="logo.png" class="register-logo" alt="Colegio Valenciana" />
         <h2>Examen enviado correctamente</h2>
-        <p>Tu examen fue guardado. Puedes cerrar esta página.</p>
+        <p class="sub">Estos son tus resultados:</p>
+        <div id="studentResults" class="student-results"></div>
+        <p class="small-note">Puedes tomar captura de pantalla de tus resultados.</p>
       </div>
     </section>
   </main>
@@ -110,9 +116,13 @@
       <div class="tool-row">
         <button id="btnQr" class="secondary">Código QR</button>
         <button id="btnExport" class="primary">Exportar Excel</button>
+        <button id="btnDownloadCloud" class="primary">Actualizar resultados de Firebase</button>
         <button id="saveKey" class="primary">Guardar clave</button>
-        <button id="clearResults" class="danger">Borrar resultados</button>
+        <button id="clearResults" class="danger">Borrar resultados locales</button>
         <button id="logoutTeacher" class="secondary">Cerrar acceso</button>
+      </div>
+      <div class="firebase-status">
+        <strong>Estado Firebase:</strong> <span id="firebaseStatus">Configuración pendiente</span>
       </div>
       <h3>Clave de respuestas</h3>
       <div id="answerKeyGrid" class="key-grid"></div>
@@ -132,6 +142,6 @@
     </div>
   </dialog>
 
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
